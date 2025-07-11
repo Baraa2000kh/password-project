@@ -1,0 +1,12 @@
+# Node.js
+node_modules/
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+
+# React
+build/
+dist/
+coverage/
+.DS_Store
