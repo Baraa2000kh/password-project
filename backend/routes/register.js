@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-router.post("/register", async (req, res) => {
+router.post("/", async (req, res) => {
   const { name, email, password, password_confirmation } = req.body;
 
   if (!name || !email || !password || !password_confirmation)
