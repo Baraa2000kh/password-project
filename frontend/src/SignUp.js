@@ -3,11 +3,14 @@ import axios from "axios";
 import Header from "./Components/Header";
 
 export default function SignUp() {
+  // useState with name,email,pass & passR to post data to severe in whith form and save new user in db
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordR, setPasswordR] = useState("");
+  // use emailError to respons data in the sever any error with email or pass
   const [errorMsg, setErrorMsg] = useState("");
+  // accept tracking the user click the submint to show errors if found
   const [accept, setAccept] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -19,7 +22,7 @@ export default function SignUp() {
     const isValid =
       name.trim() !== "" && password.length >= 8 && password === passwordR;
     if (!isValid) return;
-    //Send the request to the server
+    //Send the request  name , email , pass , pass confirmation with post to the server
     try {
       const res = await axios.post("http://localhost:8000/api/register", {
         name,
@@ -27,8 +30,9 @@ export default function SignUp() {
         password,
         password_confirmation: passwordR,
       });
+      //chiek the responts in the server and print error if found
       if (res.status === 200) {
-        // alert("Registration successful!");
+        alert("Registration successful!");
         localStorage.setItem("email", email);
         window.location.pathname = "/";
       }

@@ -129,3 +129,99 @@ body {
   text-align: center;
 }
 /* End AuthForm.css */
+
+/* Start Table Password Css*/
+.password-container {
+  max-width: 750px;
+  margin: 60px auto;
+  background-color: #f9f9fb;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.password-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.password-container form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.password-container input {
+  padding: 10px 15px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 220px;
+  transition: border-color 0.3s ease;
+}
+
+.password-container input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.password-container button[type="submit"] {
+  padding: 10px 18px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.password-container button[type="submit"]:hover {
+  background-color: #357ab8;
+}
+
+.password-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.password-table th,
+.password-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  color: #333;
+}
+
+.password-table th {
+  background-color: #e8ecf1;
+  color: #333;
+  font-weight: 600;
+}
+
+.password-table tr:hover {
+  background-color: #f1f3f5;
+}
+
+.password-table button {
+  padding: 6px 14px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.password-table button:hover {
+  background-color: #5a6268;
+}
+
+/*End Table Password Css */

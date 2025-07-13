@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
 export default function Header() {
+  const email = localStorage.getItem("email");
   //logout function
   function handleLogOut() {
     window.localStorage.removeItem("email");
+    window.localStorage.getItem("userId");
     window.location.pathname = "/";
   }
   //Check user status
@@ -14,6 +16,9 @@ export default function Header() {
       <div className="header-left">
         <Link to="/" className="header-link">
           Home
+        </Link>
+        <Link to="/Password" className="header-link">
+          Password Management
         </Link>
         <Link to="/about" className="header-link">
           About
@@ -32,9 +37,19 @@ export default function Header() {
             </Link>
           </>
         ) : (
-          <button onClick={handleLogOut} className="logout-btn">
-            Log Out
-          </button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "10px",
+            }}
+          >
+            <p> Welcam {email}</p>
+            <button onClick={handleLogOut} className="logout-btn">
+              Log Out
+            </button>
+          </div>
         )}
       </div>
     </header>
