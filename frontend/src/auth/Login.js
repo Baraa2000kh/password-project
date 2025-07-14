@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import Header from "./Components/Header";
+import Header from "../Components/Header";
 
 export default function Login() {
   //Use useState to email , password to post to sevrer date
@@ -20,7 +20,7 @@ export default function Login() {
 
     //Send data to the server use post
     try {
-      const res = await axios.post("http://localhost:8000/api/login", {
+      const res = await axios.post("http://localhost:8000/api/auth/login", {
         email,
         password,
       });
@@ -29,6 +29,7 @@ export default function Login() {
       if (res.status === 200) {
         window.localStorage.setItem("userId", res.data.userId);
         window.localStorage.setItem("email", email);
+        window.localStorage.setItem("isAdmin", res.data.isAdmin);
         window.location.pathname = "/";
       }
       //If login fails, an error code (e.g. 401 or 400) is stored.

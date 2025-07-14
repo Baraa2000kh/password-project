@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import Header from "./Components/Header";
+import Header from "../Components/Header";
 
 export default function SignUp() {
   // useState with name,email,pass & passR to post data to severe in whith form and save new user in db
@@ -24,7 +24,7 @@ export default function SignUp() {
     if (!isValid) return;
     //Send the request  name , email , pass , pass confirmation with post to the server
     try {
-      const res = await axios.post("http://localhost:8000/api/register", {
+      const res = await axios.post("http://localhost:8000/api/auth/register", {
         name,
         email,
         password,

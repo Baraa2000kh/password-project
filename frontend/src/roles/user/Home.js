@@ -1,8 +1,9 @@
-import Header from "./Components/Header";
-export default function About() {
+import Header from "../../Components/Header";
+export default function Home() {
   return (
     <div>
       <Header />
+
       <div
         style={{
           display: "flex",
@@ -12,7 +13,7 @@ export default function About() {
           height: "100vh",
         }}
       >
-        Hello to About
+        Hello to Home
       </div>
     </div>
   );

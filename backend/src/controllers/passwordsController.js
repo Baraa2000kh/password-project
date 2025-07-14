@@ -1,8 +1,7 @@
-const express = require("express");
-const router = express.Router();
 const Password = require("../models/Password");
 
-router.post("/", async (req, res) => {
+//add new password to user and websit name
+exports.addPassword = async (req, res) => {
   const { userId, website, password } = req.body;
 
   if (!userId || !website || !password) {
@@ -10,8 +9,6 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    //Save New Password in the MongooDB
-
     const newPassword = new Password({
       userId,
       website,
@@ -23,11 +20,10 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "A server error occurred." });
   }
-});
+};
 
-// Get Passwords User
-
-router.get("/:userId", async (req, res) => {
+//get all password user and websit neme
+exports.getPasswordsByUser = async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -36,6 +32,4 @@ router.get("/:userId", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "A server error occurred." });
   }
-});
-
-module.exports = router;
+};

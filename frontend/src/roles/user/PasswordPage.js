@@ -1,6 +1,53 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "./Components/Header";
+import Header from "../../Components/Header";
+import Select from "react-select";
+
+import facebookLogo from "../../assets/facebook.svg";
+import gmailLogo from "../../assets/gmail.svg";
+import instagramLogo from "../../assets/instagram.svg";
+
+const websiteOptions = [
+  {
+    value: "Facebook",
+    label: (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img
+          src={facebookLogo}
+          alt="facebook"
+          style={{ width: 20, marginRight: 8 }}
+        />
+        Facebook
+      </div>
+    ),
+  },
+  {
+    value: "Gmail",
+    label: (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img
+          src={gmailLogo}
+          alt="gmail"
+          style={{ width: 20, marginRight: 8 }}
+        />
+        Gmail
+      </div>
+    ),
+  },
+  {
+    value: "Instagram",
+    label: (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <img
+          src={instagramLogo}
+          alt="instagram"
+          style={{ width: 20, marginRight: 8 }}
+        />
+        Instagram
+      </div>
+    ),
+  },
+];
 
 export default function Home() {
   // passwords i need in order to Get passwords User
@@ -9,6 +56,8 @@ export default function Home() {
   // website & password I need this to Post a new Password.
   const [website, setWebsite] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   // Get UserId from localStorage b.c I need link new password & website (one to many)
   const userId = localStorage.getItem("userId");
@@ -39,6 +88,12 @@ export default function Home() {
       alert("Please fill in the Website and password");
       return;
     }
+    if (password !== confirmPassword) {
+      setError("كلمة المرور غير متطابقة");
+      return;
+    }
+
+    setError("");
 
     //post pass,wibsiet&UserID
     try {
@@ -80,18 +135,28 @@ export default function Home() {
       <div className="password-container">
         <h2 className="password-title">Saved Passwords</h2>
         <form onSubmit={handleAddPassword} style={{ marginBottom: "20px" }}>
-          <input
-            type="text"
-            placeholder="Website"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
+          <Select
+            options={websiteOptions}
+            onChange={(selected) => setWebsite(selected.value)}
+            placeholder="Choose a website"
+            value={websiteOptions.find((option) => option.value === website)}
           />
+
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          {error && <p style={{ color: "red" }}>{error}</p>}
+
           <button type="submit">Add Password</button>
         </form>
 
@@ -104,13 +169,13 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            {passwords.map((entry) => (
-              <tr key={entry.id}>
-                <td>{entry.site}</td>
-                <td>{entry.show ? entry.password : "********"}</td>
+            {passwords.map((item) => (
+              <tr key={item.id}>
+                <td>{item.site}</td>
+                <td>{item.show ? item.password : "********"}</td>
                 <td>
-                  <button onClick={() => toggleShow(entry.id)}>
-                    {entry.show ? "Hide" : "Show"}
+                  <button onClick={() => toggleShow(item.id)}>
+                    {item.show ? "Hide" : "Show"}
                   </button>
                 </td>
               </tr>

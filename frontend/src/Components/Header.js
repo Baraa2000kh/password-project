@@ -5,11 +5,14 @@ export default function Header() {
   //logout function
   function handleLogOut() {
     window.localStorage.removeItem("email");
-    window.localStorage.getItem("userId");
+    window.localStorage.removeItem("userId");
+    window.localStorage.removeItem("isAdmin");
     window.location.pathname = "/";
   }
   //Check user status
   const isLoggedIn = window.localStorage.getItem("email");
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  console.log();
 
   return (
     <header className="main-header">
@@ -23,6 +26,11 @@ export default function Header() {
         <Link to="/about" className="header-link">
           About
         </Link>
+        {isAdmin && (
+          <Link to="/Admin" className="header-link">
+            Dashboard
+          </Link>
+        )}
       </div>
 
       <div className="header-right">
